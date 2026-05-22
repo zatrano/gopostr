@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VposTransactionResponse>
+  <Rc>0000</Rc>
+  <AuthCode>AUTH1</AuthCode>
+  <TransactionId>TX1</TransactionId>
+  <OrderID>ORD1</OrderID>
+  <Amount>10.50</Amount>
+</VposTransactionResponse>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-9"?>
+<posnetResponse>
+  <approved>1</approved>
+  <respCode></respCode>
+  <respText></respText>
+  <oosResolveMerchantDataResponse>
+    <mdStatus>1</mdStatus>
+    <xid>00000000000000000001</xid>
+    <amount>1050</amount>
+    <currency>TL</currency>
+    <mac>PLACEHOLDER</mac>
+  </oosResolveMerchantDataResponse>
+</posnetResponse>

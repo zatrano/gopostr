@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<KuveytTurkVPosMessage>
+  <ResponseCode>00</ResponseCode>
+  <ResponseMessage>Onaylandi</ResponseMessage>
+  <ProvisionNumber>AUTH-K1</ProvisionNumber>
+  <MerchantOrderId>ORD-K1</MerchantOrderId>
+  <OrderId>888</OrderId>
+  <RRN>RRN-K1</RRN>
+  <Stan>STAN-K1</Stan>
+  <Amount>10000</Amount>
+  <CurrencyCode>0949</CurrencyCode>
+</KuveytTurkVPosMessage>

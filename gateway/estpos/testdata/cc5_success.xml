@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-9"?>
+<CC5Response>
+  <OrderId>E-3</OrderId>
+  <GroupId>GRP1</GroupId>
+  <TransId>TX123</TransId>
+  <AuthCode>AUTH99</AuthCode>
+  <HostRefNum>HOST99</HostRefNum>
+  <ProcReturnCode>00</ProcReturnCode>
+  <Response>Approved</Response>
+  <ErrMsg></ErrMsg>
+</CC5Response>

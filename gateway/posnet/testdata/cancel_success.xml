@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-9"?>
+<posnetResponse>
+  <approved>1</approved>
+  <respCode></respCode>
+  <respText>İptal OK</respText>
+  <transaction>
+    <authCode>CAUTH</authCode>
+    <hostlogkey>CHOST</hostlogkey>
+  </transaction>
+</posnetResponse>

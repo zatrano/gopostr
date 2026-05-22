@@ -1,0 +1,8 @@
+{
+  "ServiceResponseData": {
+    "ResponseCode": "00",
+    "ResponseDescription": "OK"
+  },
+  "AuthCode": "AUTH1",
+  "ReferenceCode": "REF1"
+}

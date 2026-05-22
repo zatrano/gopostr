@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-9"?>
+<posnetResponse>
+  <approved>1</approved>
+  <respCode></respCode>
+  <respText></respText>
+  <transactions>
+    <transaction>
+      <orderID>TDSC00000000000000000001</orderID>
+      <amount>1050</amount>
+      <currencyCode>TL</currencyCode>
+      <state>Sale</state>
+      <authCode>STAUTH</authCode>
+      <hostlogkey>STHOST</hostlogkey>
+    </transaction>
+  </transactions>
+</posnetResponse>

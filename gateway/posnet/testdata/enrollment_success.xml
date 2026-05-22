@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-9"?>
+<posnetResponse>
+  <approved>1</approved>
+  <respCode></respCode>
+  <respText>İşlem başarılı</respText>
+  <oosRequestDataResponse>
+    <data1>ENC_DATA1</data1>
+    <data2>ENC_DATA2</data2>
+    <sign>DIGEST_SIGN</sign>
+  </oosRequestDataResponse>
+</posnetResponse>

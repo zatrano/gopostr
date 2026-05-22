@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VposResponse>
+  <ResultCode>0000</ResultCode>
+  <ResultDetail>İşlem Başarılı</ResultDetail>
+  <TransactionId>TX-PF-1</TransactionId>
+  <OrderId>ORD-PF-1</OrderId>
+  <AuthCode>AUTH1</AuthCode>
+  <Rrn>RRN99</Rrn>
+</VposResponse>

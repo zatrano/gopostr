@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GVPSResponse>
+  <Order>
+    <OrderID>ORDER-G1</OrderID>
+  </Order>
+  <Transaction>
+    <Response>
+      <Code>00</Code>
+      <Message>Approved</Message>
+    </Response>
+    <AuthCode>AUTH1</AuthCode>
+    <RetrefNum>RET99</RetrefNum>
+  </Transaction>
+</GVPSResponse>

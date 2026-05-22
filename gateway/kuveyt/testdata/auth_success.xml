@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<KuveytTurkVPosMessage>
+  <ResponseCode>00</ResponseCode>
+  <ResponseMessage>OK</ResponseMessage>
+  <MD>md-test-token</MD>
+  <VPosMessage>
+    <InstallmentCount>0</InstallmentCount>
+    <Amount>10000</Amount>
+    <CurrencyCode>0949</CurrencyCode>
+    <MerchantOrderId>ORD-K1</MerchantOrderId>
+    <TransactionSecurity>3</TransactionSecurity>
+  </VPosMessage>
+</KuveytTurkVPosMessage>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IPaySecure>
+  <Message>
+    <VERes>
+      <Status>Y</Status>
+      <PaReq>pareq-test</PaReq>
+      <TermUrl>https://merchant.test/term</TermUrl>
+      <MD>md-test</MD>
+      <ACSUrl>https://acs.test/3d</ACSUrl>
+    </VERes>
+  </Message>
+</IPaySecure>

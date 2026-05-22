@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Body>
+    <SaleReversalResponse>
+      <SaleReversalResult>
+        <Value>
+          <ResponseCode>00</ResponseCode>
+          <MerchantOrderId>ORD-K1</MerchantOrderId>
+          <Stan>STAN-C</Stan>
+          <RRN>RRN-C</RRN>
+        </Value>
+      </SaleReversalResult>
+    </SaleReversalResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

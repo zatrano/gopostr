@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<VPosMessageContract>
+  <ResponseCode>00</ResponseCode>
+  <ResponseMessage>OK</ResponseMessage>
+  <ProvisionNumber>PROV-VK</ProvisionNumber>
+  <MerchantOrderId>ORD-VK-1</MerchantOrderId>
+  <OrderId>777</OrderId>
+  <RRN>RRN-VK</RRN>
+  <Stan>STAN-VK</Stan>
+  <Amount>5000</Amount>
+</VPosMessageContract>

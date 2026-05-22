@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PayforResponse>
+  <ProcReturnCode>00</ProcReturnCode>
+  <ErrMsg></ErrMsg>
+  <TransId>TX-PF-1</TransId>
+  <OrderId>PF-1</OrderId>
+  <AuthCode>AUTH1</AuthCode>
+  <HostRefNum>HOST1</HostRefNum>
+</PayforResponse>

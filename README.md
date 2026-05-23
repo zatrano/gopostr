@@ -1,15 +1,32 @@
 # gopostr
 
-Türkiye **banka sanal POS** entegrasyonları için **saf Go** kütüphanesi.
+> **Türkiye banka sanal POS entegrasyonları için kurumsal düzeyde, saf Go kütüphanesi.**
 
-- Yalnızca lisanslı bankalar
-- Harici bağımlılık yok (Go 1.25+, standart kütüphane)
-- Tek arayüz: `gateway.Gateway`
-- 3D Secure, 3D Pay, 3D Host
+Tek bir arayüz. Sıfır harici bağımlılık. Lisanslı bankalar. Üretime hazır.
 
 ```bash
-go get github.com/zatrano/gopostr
+go get github.com/zatrano/gopostr@latest
 ```
+
+```
+Go 1.25+   ·   Standart kütüphane   ·   MIT Lisansı
+```
+
+---
+
+## Neden gopostr?
+
+| | gopostr |
+|---|---|
+| **Bağımlılık** | Yok — yalnızca Go standart kütüphanesi |
+| **Banka desteği** | 11 gateway, 16+ banka |
+| **Protokol** | XML, JSON, SOAP — banka ne istiyorsa |
+| **3D modelleri** | 3D Secure · 3D Pay · 3D Host |
+| **İşlemler** | Ödeme · İptal · İade · Durum sorgusu |
+| **Test** | Her gateway için fixture tabanlı birim testleri |
+| **Arayüz** | Tüm bankalar tek `gateway.Gateway` contract'ı |
+
+---
 
 ## İçindekiler
 
@@ -76,21 +93,21 @@ Ayrıntılar: [`gateway/README.md`](gateway/README.md)
 
 ### Factory anahtarları
 
-| Factory | Banka | Protokol |
-|---------|-------|----------|
-| `estpos` | TEB, İş Bankası, Halkbank, Şekerbank, Ziraat, eski Akbank (Payten/Asseco) | XML (EstV3) |
+| Factory | Desteklenen Bankalar | Protokol |
+|---------|----------------------|----------|
+| `estpos` | TEB, İş Bankası, Halkbank, Şekerbank, Ziraat Bankası, Akbank (eski) | XML — Payten/Asseco EstV3, SHA-512 |
 | `garanti` | Garanti BBVA | XML |
-| `akbank` | Akbank (yeni sanal POS) | JSON |
-| `payflex` | Vakıfbank, Ziraat Bankası | XML (PayFlex VPOS) |
-| `payflexcpv4` | Vakıfbank | XML (PayFlex CP v4) |
-| `payfor` | QNB Finansbank, Enpara, Ziraat Katılım | XML (PayFor) |
-| `posnet` | Yapı Kredi | XML (PosNet) |
-| `posnetv1` | Albaraka Türk | JSON (PosNet V1) |
+| `akbank` | Akbank (yeni sanal POS API) | JSON |
+| `payflex` | Vakıfbank, Ziraat Bankası | XML — PayFlex VPOS |
+| `payflexcpv4` | Vakıfbank | XML — PayFlex CP v4 |
+| `payfor` | QNB Finansbank, Enpara, Ziraat Katılım | XML — PayFor |
+| `posnet` | Yapı Kredi Bankası | XML — PosNet |
+| `posnetv1` | Albaraka Türk Katılım Bankası | JSON — PosNet V1 |
 | `interpos` | Denizbank | InterPos |
-| `kuveyt` | Kuveyt Türk | XML + SOAP |
-| `vakifkatilim` | Vakıf Katılım | XML |
+| `kuveyt` | Kuveyt Türk Katılım Bankası | XML + SOAP |
+| `vakifkatilim` | Vakıf Katılım Bankası | XML |
 
-`posnet` ve `posnetv1` **farklı bankalar ve farklı API**’lerdir; birbirinin yerine kullanılamaz.
+> **Not:** `posnet` (Yapı Kredi) ile `posnetv1` (Albaraka) farklı bankalar ve tamamen farklı API'lerdir; birbirinin yerine kullanılamaz. Yeni Akbank entegrasyonu için `estpos` değil `akbank` kullanın.
 
 ### İşlem desteği
 
@@ -108,9 +125,9 @@ Ayrıntılar: [`gateway/README.md`](gateway/README.md)
 | kuveyt | ✓ | — | — | ✓ | ✓ | ✓ |
 | vakifkatilim | ✓ | — | ✓ | ✓ | ✓ | ✓ |
 
-- `estpos`: Payten/Asseco **EstV3** (SHA-512); yeni Akbank için `akbank` kullanın
-- `akbank`: ayrı `Status()` yok
-- `payflexcpv4`: iptal/iade/status yok; sonuç `HandleCallback` ile doğrulanır
+**Notlar:**
+- `akbank`: ayrı `Status()` metodu yoktur; işlem sonucu `HandleCallback` ile doğrulanır
+- `payflexcpv4`: iptal/iade/status desteklenmez; işlem sonucu yalnızca `HandleCallback` ile doğrulanır
 
 Factory sabitleri: `factory.GatewayGaranti`, `factory.GatewayAkbank`, …
 
@@ -118,7 +135,7 @@ Factory sabitleri: `factory.GatewayGaranti`, `factory.GatewayAkbank`, …
 
 ## Kurulum
 
-Go **1.25+**
+Go **1.25+** gereklidir.
 
 ```bash
 go get github.com/zatrano/gopostr@latest
@@ -167,7 +184,7 @@ form, err := gw.Init(ctx, model.InitRequest{
 
 ## Kart bilgisi ve `CardInput`
 
-**Önerilen kullanım (PCI):** `3d` ve `3d_pay` modellerinde `InitRequest.Card` **nil** bırakın. Müşteri kartını bankanın 3D sayfasında girer; PAN/CVV sizin sunucunuza gitmez.
+**Önerilen kullanım (PCI):** `3d` ve `3d_pay` modellerinde `InitRequest.Card` **nil** bırakın. Müşteri kartını bankanın 3D sayfasında girer; PAN/CVV sizin sunucunuza gelmez.
 
 | Model | `Card` Init'te? | Nerede girilir? |
 |-------|-----------------|-----------------|
@@ -176,9 +193,9 @@ form, err := gw.Init(ctx, model.InitRequest{
 | `3d_host` (3D Host) | Hayır | Bankanın host ödeme sayfası |
 | `3d_pay_hosting` | Hayır | Banka / hosting sayfası |
 
-`model.CardInput` yalnızca **eski entegrasyonlar** veya bankanın zorunlu kıldığı form POST akışları içindir (ör. bazı gateway'ler Init'te kart alanlarını HTML forma yazar). Üretimde mümkün olduğunca kullanmayın.
+`model.CardInput` yalnızca **eski entegrasyonlar** veya bankanın teknik olarak zorunlu kıldığı form POST akışları içindir. Üretimde mümkün olduğunca kullanmayın.
 
-**Kütüphane notu:** `posnet` (Yapı Kredi) enrollment API'si nedeniyle `Init` sırasında kart bilgisi ister; `estpos` `3d` modelinde kart yoksa hata döner. Bu teknik zorunluluklar PHP referansından gelir; yine de kartı kendi sitenizde toplayıp sunucuya göndermek yerine banka sayfasına yönlendirme mümkünse tercih edilir.
+**Banka özgü gereksinimler:** `posnet` (Yapı Kredi) enrollment API'si nedeniyle `Init` sırasında kart bilgisi ister; `estpos` `3d` modelinde kart yoksa hata döner. Bu teknik zorunluluklar ilgili banka API'sinden kaynaklanmaktadır.
 
 ---
 
@@ -189,13 +206,13 @@ Tüm bankalar `gateway.Gateway` implement eder:
 | Metot | Açıklama |
 |-------|----------|
 | `Init` | 3D işlemi başlatır; `model.FormData` döner |
-| `HandleCallback` | Banka dönüşünü işler; `model.PaymentResult` |
-| `Cancel` | İptal |
-| `Refund` | İade |
+| `HandleCallback` | Banka dönüşünü işler; `model.PaymentResult` döner |
+| `Cancel` | İptal işlemi |
+| `Refund` | İade işlemi |
 | `Status` | Durum sorgusu (destekleyen bankalarda) |
 | `Name` | Gateway adı |
 
-Doğrudan banka paketi:
+Doğrudan banka paketini de kullanabilirsiniz:
 
 ```go
 import "github.com/zatrano/gopostr/gateway/garanti"
@@ -217,7 +234,7 @@ gw := garanti.New(garanti.Config{
 | `PaymentModel3DHost` | `3d_host` | 3D Host |
 | `PaymentModel3DPayHosting` | `3d_pay_hosting` | PayFor hosting |
 
-İşlem türleri: `TxTypePayAuth`, `TxTypePayPreAuth`, `TxTypeCancel`, `TxTypeRefund`, `TxTypeRefundPartial`, `TxTypeStatus`.
+İşlem türleri: `TxTypePayAuth`, `TxTypePayPreAuth`, `TxTypeCancel`, `TxTypeRefund`, `TxTypeRefundPartial`, `TxTypeStatus`
 
 Para birimi: `CurrencyTRY`, `CurrencyUSD`, `CurrencyEUR`, …
 
@@ -244,7 +261,7 @@ Ortak struct: `model.BankCredentials`
 
 **Albaraka (`posnetv1`):** `ClientID`, `PosNetID`, `TerminalID`, `StoreKey`
 
-**Kuveyt Türk:** `Password` = CustomerId; iptal/iade için `Order.RecurringID` banka sipariş no
+**Kuveyt Türk:** `Password` = CustomerId; iptal/iade için `Order.RecurringID` = banka sipariş no
 
 **PayFlex CP v4:** `ClientID`, `Password`, `TerminalID`
 
@@ -256,10 +273,10 @@ Ortak struct: `model.BankCredentials`
 Uygulama → Init() → FormData → müşteri + banka 3D → HandleCallback() → PaymentResult
 ```
 
-`model.FormData`: `Gateway` (URL), `Method`, `Inputs`, isteğe bağlı `HTML`.
+`model.FormData` alanları: `Gateway` (URL), `Method`, `Inputs`, isteğe bağlı `HTML`.
 
-- POST: gizli alanlarla form veya `HTML` otomatik gönderim
-- GET: `Gateway` + `Inputs` query (ör. PayFlex CP `Ptkn`)
+- **POST:** gizli alanlarla form veya `HTML` otomatik gönderim
+- **GET:** `Gateway` + `Inputs` query string (ör. PayFlex CP `Ptkn`)
 
 ---
 
@@ -275,40 +292,40 @@ if result.Success {
 }
 ```
 
-Production’da callback hash doğrulamasını kapatmayın (`SkipHashCheck` yalnızca test içindir).
+> Production ortamında callback hash doğrulamasını kapatmayın. `SkipHashCheck` yalnızca test içindir.
 
 ### Yapı Kredi (`posnet`) — callback'te state
 
 Banka dönüşünde genelde şu alanlar gelir: `BankPacket`, `MerchantPacket`, `Sign` (bazen `bankData` / `merchantData`).
 
-`HandleCallback` ayrıca **sipariş bağlamı** ister: `orderId`, `amount`, `currency`. Bunlar bankanın POST'unda çoğu zaman **yoktur**; `Init` sırasında sizin oluşturduğunuz sipariş kaydından callback handler'da `payload` map'ine **eklemeniz** gerekir (bkz. `gateway/posnet` testleri).
+`HandleCallback` ayrıca **sipariş bağlamı** ister: `orderId`, `amount`, `currency`. Bu alanlar bankanın POST'unda çoğu zaman **bulunmaz**; `Init` sırasında oluşturduğunuz sipariş kaydından callback handler'da `payload` map'ine **eklemeniz** gerekir.
 
-**Nerede saklanır?** gopostr state tutmaz; uygulama katmanının sorumluluğu:
+**gopostr state tutmaz;** bu sorumluluk uygulama katmanına aittir:
 
-| Yöntem | Ne zaman? |
-|--------|-----------|
+| Yöntem | Ne zaman tercih edilir? |
+|--------|------------------------|
 | **Redis** (önerilen) | Birden fazla API instance, kısa TTL (15–30 dk), key = `orderId` |
-| **Oturum (session)** | Tek sunucu / sticky session; Fiber `session` middleware |
+| **Oturum (session)** | Tek sunucu / sticky session |
 | **Veritabanı** | Sipariş zaten `pending_payment` satırında; callback'te aynı satır okunur |
 
-Örnek akış (Fiber + Redis):
+**Örnek akış (Fiber + Redis):**
 
 ```
-1. POST /odeme/baslat → sipariş DB'ye yaz, Init(orderId, amount, …)
+1. POST /odeme/baslat  → siparişi DB'ye yaz, Init(orderId, amount, …)
 2. Redis SET pos:3d:{orderId} → {amount, currency, gateway}  TTL 20m
 3. Müşteriyi form.Gateway'e yönlendir
 4. GET/POST /odeme/callback → banka alanlarını parse et
-5. Redis GET pos:3d:{orderId} → payload["orderId"], payload["amount"], payload["currency"] ile birleştir
-6. gw.HandleCallback(ctx, payload) → başarılıysa siparişi DB'de paid yap, Redis DEL
+5. Redis GET pos:3d:{orderId} → payload'a orderId, amount, currency ekle
+6. gw.HandleCallback(ctx, payload) → başarılıysa siparişi paid yap, Redis DEL
 ```
 
-`BankPacket` / `MerchantPacket` / `Sign` Init'ten gelmez; yalnızca bankanın callback POST'undan gelir. Init sonrası saklanması gerekenler: **sizin** `orderId`, `amount`, `currency` (ve isteğe bağlı `installment`, `txType`).
+`BankPacket` / `MerchantPacket` / `Sign` Init'ten gelmez; yalnızca bankanın callback POST'undan gelir. Init sonrası saklanması gereken değerler: **sizin** `orderId`, `amount`, `currency` (ve isteğe bağlı `installment`, `txType`).
 
 ### Diğer gateway notları
 
 | Gateway | Not |
 |---------|-----|
-| `payflexcpv4` | `TransactionId`, `PaymentToken`; `Rc != 0000` reddedilmiş işlem |
+| `payflexcpv4` | `TransactionId`, `PaymentToken`; `Rc != 0000` reddedilmiş işlem anlamına gelir |
 
 Çoğu bankada callback payload tek başına yeterlidir (`oid`, `amount` bankadan gelir). `posnet` bu kuralın istisnasıdır.
 
@@ -320,10 +337,12 @@ Banka dönüşünde genelde şu alanlar gelir: `BankPacket`, `MerchantPacket`, `
 gw.Cancel(ctx, model.CancelRequest{
     Order: model.Order{ID: "SIPARIS-001", RefRetNum: "HOST_REF"},
 })
+
 gw.Refund(ctx, model.RefundRequest{
     Order: model.Order{ID: "SIPARIS-001", Amount: 50},
     Partial: true,
 })
+
 gw.Status(ctx, model.StatusRequest{
     Order: model.Order{ID: "SIPARIS-001"},
 })
@@ -337,15 +356,15 @@ gw.Status(ctx, model.StatusRequest{
 go test ./...
 ```
 
-Her banka paketi `gateway_test.go`, `crypt_test.go` ve `testdata/` fixture’ları ile test edilir; gerçek bankaya istek gitmez.
+Her banka paketi `gateway_test.go`, `crypt_test.go` ve `testdata/` fixture'ları ile test edilir; gerçek bankaya istek gitmez.
 
 ---
 
 ## Katkı
 
-1. Fork ve branch
+1. Fork ve branch oluşturun
 2. `go test ./...` geçmeli
-3. Yeni banka: `gateway/README.md` şablonuna uygun paket + `factory` kaydı
+3. Yeni banka: `gateway/README.md` şablonuna uygun paket + `factory` kaydı ekleyin
 
 [GitHub Issues](https://github.com/zatrano/gopostr/issues)
 

@@ -1,16 +1,27 @@
+<div align="center">
+
+<br>
+
+[![Go 1.25+](https://img.shields.io/badge/Go-1.25%2B-7F77DD?style=flat-square&logo=go&logoColor=white)](https://go.dev)
+[![MIT](https://img.shields.io/badge/Lisans-MIT-1D9E75?style=flat-square)](LICENSE)
+[![Sıfır bağımlılık](https://img.shields.io/badge/Bağımlılık-Yok-185FA5?style=flat-square)]()
+
 # gopostr
 
-> **Türkiye banka sanal POS entegrasyonları için kurumsal düzeyde, saf Go kütüphanesi.**
+**Türkiye'nin lisanslı bankalarına yönelik sanal POS entegrasyonu için  
+kurumsal düzeyde, saf Go kütüphanesi.**
 
-Tek bir arayüz. Sıfır harici bağımlılık. Lisanslı bankalar. Üretime hazır.
+Tek arayüz &nbsp;·&nbsp; Sıfır harici bağımlılık &nbsp;·&nbsp; Üretime hazır
 
 ```bash
 go get github.com/zatrano/gopostr@latest
 ```
 
-```
-Go 1.25+   ·   Standart kütüphane   ·   MIT Lisansı
-```
+| 11 Gateway | 16+ Banka | 3D Secure · Pay · Host | 0 Bağımlılık |
+|:---:|:---:|:---:|:---:|
+| Lisanslı | BDDK onaylı | PCI uyumlu akış | Standart kütüphane |
+
+</div>
 
 ---
 
